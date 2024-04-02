@@ -31,7 +31,7 @@ public class MovimientoSalto : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
 
        // moveInput = Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(moveInput * speed, rb2D.velocity.y);
@@ -59,7 +59,18 @@ public class MovimientoSalto : MonoBehaviour
         moveInput = context.ReadValue<Vector2>().x;
         Debug.Log("me muevo");
     }
-
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.performed && Isgrounded())
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
+            Debug.Log("SALTA");
+        }
+    }
+    private bool Isgrounded()
+    {
+        return isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 

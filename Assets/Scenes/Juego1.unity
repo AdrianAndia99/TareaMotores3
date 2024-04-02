@@ -971,6 +971,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f13cee81-ac51-4c2d-bd18-f49bb80dc0f1
     m_ActionName: PlayerController/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 617129762}
+        m_TargetAssemblyTypeName: MovimientoSalto, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9202786e-f5f9-48a1-a321-bb267cc89fd3
+    m_ActionName: PlayerController/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: PlayerController
