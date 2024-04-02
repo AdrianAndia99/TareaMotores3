@@ -21,10 +21,8 @@ public class SistemaPuntos : MonoBehaviour
         puntaje += puntos;
         ActualizarPuntaje();
     }
-
     void ActualizarPuntaje()
     {
-        // Disparar el evento para notificar a otros objetos sobre el cambio de puntaje
         PlayerPrefs.SetInt("PuntajeGuardado", puntaje);
         PlayerPrefs.Save();
         OnPuntajeActualizado?.Invoke(puntaje);

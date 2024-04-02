@@ -54,19 +54,16 @@ public class MovimientoSalto : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SpriteRenderer spriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+        /*SpriteRenderer spriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            // Obtener el color del objeto
             Color colorObjeto = spriteRenderer.color;
 
-            // Comprobar si el jugador y el objeto tienen el mismo color
             if (colorJugador == colorObjeto)
             {
-                // Permitir que el jugador atraviese el objeto
                 Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
             }
-        }
+        }*/
 
         if (collision.gameObject.tag == "Enemy")
         {

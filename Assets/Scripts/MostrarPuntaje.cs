@@ -16,10 +16,8 @@ public class MostrarPuntaje : MonoBehaviour
 
     void ActualizarTextoPuntaje(int nuevoPuntaje)
     {
-        // Actualizar el texto con el nuevo puntaje
         textoPuntaje.text = "Puntaje: " + nuevoPuntaje.ToString();
     }
-
     void OnDestroy()
     {
         SistemaPuntos.OnPuntajeActualizado -= ActualizarTextoPuntaje;
