@@ -5,7 +5,6 @@ public class SistemaPuntos : MonoBehaviour
 {
     public delegate void PuntajeActualizado(int nuevoPuntaje);
     public static event PuntajeActualizado OnPuntajeActualizado;
-    public UnityEvent<int> OnPuntajeCambiado;
 
     public int puntaje = 0;
 

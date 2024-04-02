@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MovimientoSalto : MonoBehaviour
 {
@@ -32,10 +33,10 @@ public class MovimientoSalto : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
 
-        moveInput = Input.GetAxis("Horizontal");
+       // moveInput = Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(moveInput * speed, rb2D.velocity.y);
     }
-    void Update()
+   /* void Update()
     {
         if(isGrounded == true)
         {
@@ -51,19 +52,16 @@ public class MovimientoSalto : MonoBehaviour
             rb2D.velocity = Vector2.up * jumpforce;
         }        
 
+    }*/
+
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>().x;
+        Debug.Log("me muevo");
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*SpriteRenderer spriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            Color colorObjeto = spriteRenderer.color;
-
-            if (colorJugador == colorObjeto)
-            {
-                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
-            }
-        }*/
 
         if (collision.gameObject.tag == "Enemy")
         {
