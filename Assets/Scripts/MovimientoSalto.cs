@@ -8,6 +8,8 @@ public class MovimientoSalto : MonoBehaviour
 {
     public float speed;
     public float jumpforce;
+    public int maxJumps = 2;
+    int JumpsRemaining;
     private float moveInput;
     public string LoseScene;
 
@@ -20,15 +22,12 @@ public class MovimientoSalto : MonoBehaviour
     public Transform groundCheck;
     public float check;
     public LayerMask whatIsGround;
-    private int extraJump;
-
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         colorJugador = GetComponent<SpriteRenderer>().color;
     }
-
     void FixedUpdate()
     {
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
@@ -36,24 +35,11 @@ public class MovimientoSalto : MonoBehaviour
        // moveInput = Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(moveInput * speed, rb2D.velocity.y);
     }
-   /* void Update()
+    void Update()
     {
-        if(isGrounded == true)
-        {
-            extraJump = 1;
-        }
+        Isgrounded();
 
-        if(Input.GetKeyDown(KeyCode.Space) && extraJump > 0)
-        {
-            rb2D.velocity = Vector2.up * jumpforce;
-            extraJump--;
-        }else if(Input.GetKeyDown(KeyCode.Space) && extraJump == 0 && isGrounded == true)
-        {
-            rb2D.velocity = Vector2.up * jumpforce;
-        }        
-
-    }*/
-
+    }
     public void OnMovement(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>().x;
@@ -61,15 +47,27 @@ public class MovimientoSalto : MonoBehaviour
     }
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed && Isgrounded())
+        if (JumpsRemaining > 0)
         {
-            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
+            if (context.performed)
+            {
+                rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
+                JumpsRemaining--;
+            }else if (context.canceled)
+            {
+                rb2D.velocity = new Vector2(rb2D.velocity.x, rb2D.velocity.y * 0.5f);
+                JumpsRemaining--;
+            }
             Debug.Log("SALTA");
+
         }
     }
-    private bool Isgrounded()
+    private void Isgrounded()
     {
-        return isGrounded = Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround);
+        if(Physics2D.OverlapCircle(groundCheck.position, check, whatIsGround))
+        {
+            JumpsRemaining = maxJumps;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
